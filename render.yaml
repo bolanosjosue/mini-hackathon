@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mini-hackathon-app
+    env: php
+    buildCommand: composer install && npm install && npm run build
+    startCommand: vendor/bin/heroku-php-apache2 public/
+    envVars:
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: LOG_CHANNEL
+        value: stderr
+    disk:
+      name: mini-hackathon-disk
+      mountPath: /storage
+      sizeGB: 1
